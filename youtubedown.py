@@ -138,7 +138,7 @@ finishLabel.place(x=255, y=200)
 
 #quality choice
 quality_menu = customtkinter.CTkOptionMenu(app, values=["Quality", "360p", "480p", "720p", "Highest (Auto)" ],
-                                    width=30, height=30, fg_color="blue", button_color="blue") #en sona command=optionmenu_callback
+                                    width=30, height=30, fg_color="blue", button_color="blue")
 
 quality_menu.pack()
 quality_menu.place(x = 515, y = 47)
