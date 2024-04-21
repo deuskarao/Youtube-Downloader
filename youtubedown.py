@@ -1,9 +1,8 @@
-import os, sys, webbrowser
+import os, webbrowser
 import tkinter
 import customtkinter
-from pytube import YouTube, Playlist
+from pytube import YouTube
 from PIL import Image
-
 
 
 #Image Load..
@@ -41,14 +40,14 @@ def downstarter():
         finishLabel.configure(text="")
         finishLabel.update()
 
-    except:
+    except Exception as e:
+        print(e)
         if len(ytlink) < 20:
             finishLabel.configure(text="Please Enter a Link", text_color="red")
         
         else:
             finishLabel.configure(text="Error Occured", text_color="red")
             finishLabel.update()
-
 
 
 def downstarter_mp3():
@@ -65,11 +64,12 @@ def downstarter_mp3():
 
         vid.download()
 
-        finishLabel.configure(text="Download Completed")
+        finishLabel.configure(text="Download Completed", text_color="green")
         finishLabel.configure(text="")
         finishLabel.update()
 
-    except:
+    except Exception as e:
+        print(e)
         if len(ytlink) < 20:
             finishLabel.configure(text="Please Enter a Link", text_color="red")
             finishLabel.update()
@@ -79,8 +79,7 @@ def downstarter_mp3():
             finishLabel.update()
 
 
-
-def progfunc(stream, chunk, bytes_remaining):
+def progfunc(stream, bytes_remaining):
     total_size = stream.filesize
     bytes_done = total_size - bytes_remaining
     percent_done = bytes_done / total_size * 100 
@@ -90,7 +89,6 @@ def progfunc(stream, chunk, bytes_remaining):
     progPercent.update()
 
     progBar.set(float(percent_done) / 100) #updating bar
-
 
 
 #system setting
@@ -106,7 +104,6 @@ app.iconbitmap('myicon.ico')
 
 
 # -- uı elements -- 
-
 title = customtkinter.CTkLabel(app, text="Link : ")
 title.pack(padx=10, pady=10)
 title.place(x=35, y=47)
@@ -120,7 +117,6 @@ nametit2.pack()
 nametit2.place(x=100, y=7)
 
 
-
 #link input
 urlinput = tkinter.StringVar()
 link = customtkinter.CTkEntry(app, width=420, height=30, textvariable=urlinput)
@@ -128,12 +124,10 @@ link.pack()
 link.place(x=90, y=47)
 
 
-
 #download end
 finishLabel = customtkinter.CTkLabel(app, text="")
 finishLabel.pack()
 finishLabel.place(x=255, y=200)
-
 
 
 #quality choice
@@ -144,7 +138,6 @@ quality_menu.pack()
 quality_menu.place(x = 515, y = 47)
 
 
-
 #download-buttons
 download = customtkinter.CTkButton(app, text="Download .mp4", command=downstarter)
 download.pack()
@@ -153,7 +146,6 @@ download.place(x = 150, y = 109)
 download_mp3 = customtkinter.CTkButton(app, text="Download Audio", command=downstarter_mp3)
 download_mp3.pack()
 download_mp3.place(x =320, y = 109)
-
 
 
 #progress
@@ -170,7 +162,7 @@ progBar.place(x=95, y=177)
 #advertisement
 adver_title = customtkinter.CTkButton(app, image = image_1, text="Other Repositories", text_color="white", fg_color="gray")
 adver_title.pack()
-adver_title.bind("<Button-1>", lambda e, : webbrowser.open_new(r"https://github.com/OldKokoroz"))
+adver_title.bind("<Button-1>", lambda e, : webbrowser.open_new(r"https://github.com/deuskarao"))
 adver_title.place(x=150, y=270)
 
 adver_title2 = customtkinter.CTkButton(app, image = image_2, text="My Website", text_color="white", fg_color="gray")
